@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}
+Export Ready · ComicCraft
+{% endblock %}
+
+
+{% block content %}
+
+<section class="success-card">
+
+<div class="success-icon">
+✓
+</div>
+
+
+<p class="eyebrow">
+EXPORT READY
+</p>
+
+
+<h1>
+Your comic is ready!
+</h1>
+
+
+<p>
+
+Your five-panel comic has been
+compiled into a PDF containing
+the illustrations and story.
+
+</p>
+
+
+
+<div class="actions center">
+
+
+<a
+    class="primary button-link"
+    href="/download/{{ comic.comic_id }}"
+>
+Download PDF
+</a>
+
+
+<a
+    class="secondary button-link"
+    href="/"
+>
+Create Another Comic
+</a>
+
+
+</div>
+
+
+</section>
+
+{% endblock %}

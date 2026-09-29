@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+
+{% block title %}
+Create a Comic · ComicCraft
+{% endblock %}
+
+
+{% block content %}
+
+<section class="hero">
+
+    <p class="eyebrow">
+        GEMINI + AI IMAGE GENERATION
+    </p>
+
+    <h1>
+        Turn your idea into a comic.
+    </h1>
+
+    <p class="hero-copy">
+
+        Create a five-panel comic with
+        AI-generated storytelling,
+        dialogue, illustrations and
+        downloadable PDF.
+
+    </p>
+
+</section>
+
+
+<section class="card form-card">
+
+<form
+    action="/generate"
+    method="post"
+    id="comic-form"
+>
+
+
+<label for="story_prompt">
+    Story Prompt
+</label>
+
+
+<textarea
+    id="story_prompt"
+    name="story_prompt"
+    rows="5"
+    placeholder="A brave fox explores an enchanted forest and discovers a hidden library..."
+    required
+></textarea>
+
+
+
+<div class="grid">
+
+
+<div>
+
+<label for="character_name">
+    Main Character Name
+</label>
+
+<input
+    id="character_name"
+    name="character_name"
+    placeholder="Lumi"
+    required
+>
+
+</div>
+
+
+
+<div>
+
+<label for="setting">
+    Setting
+</label>
+
+<select
+    id="setting"
+    name="setting"
+>
+
+<option>
+Enchanted forest
+</option>
+
+<option>
+School
+</option>
+
+<option>
+Space
+</option>
+
+<option>
+Futuristic city
+</option>
+
+<option>
+Village
+</option>
+
+<option>
+Underwater world
+</option>
+
+</select>
+
+</div>
+
+
+
+<div>
+
+<label for="tone">
+    Story Tone
+</label>
+
+<select
+    id="tone"
+    name="tone"
+>
+
+<option>
+Adventurous
+</option>
+
+<option>
+Light-hearted
+</option>
+
+<option>
+Dramatic
+</option>
+
+<option>
+Poetic
+</option>
+
+<option>
+Funny
+</option>
+
+<option>
+Mysterious
+</option>
+
+</select>
+
+</div>
+
+
+
+<div>
+
+<label for="art_style">
+    Art Style
+</label>
+
+<select
+    id="art_style"
+    name="art_style"
+>
+
+<option>
+Comic book
+</option>
+
+<option>
+Anime
+</option>
+
+<option>
+Pixel art
+</option>
+
+<option>
+Watercolor illustration
+</option>
+
+<option>
+Graphic novel
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+
+<button
+    type="submit"
+    class="primary"
+    id="generate-button"
+>
+
+<span id="button-label">
+Create My Comic
+</span>
+
+<span
+    id="spinner"
+    class="spinner hidden"
+></span>
+
+</button>
+
+
+<p class="hint">
+
+AI generation may take a few minutes
+because every panel receives its own
+illustration.
+
+</p>
+
+
+</form>
+
+</section>
+
+{% endblock %}
