@@ -41,7 +41,6 @@ class PromptRequest(BaseModel):
     )
     @classmethod
     def validate_text(cls, value: str) -> str:
-
         value = value.strip()
 
         if not value:
