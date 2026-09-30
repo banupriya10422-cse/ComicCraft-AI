@@ -1,0 +1,601 @@
+{% extends "base.html" %}
+
+{% block title %}
+Create a Comic · ComicCraft
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <p class="eyebrow">
+        GEMINI + AI IMAGE GENERATION
+    </p>
+
+    <h1>
+        Turn your idea into a comic.
+    </h1>
+
+    <p class="hero-copy">
+        Create a personalized comic with
+        AI-generated storytelling,
+        dialogue, illustrations and
+        downloadable PDF.
+    </p>
+
+</section>
+
+
+<section class="card form-card">
+
+<form
+    action="/generate"
+    method="post"
+    id="comic-form"
+>
+
+
+<!-- ========================================= -->
+<!-- STORY PROMPT -->
+<!-- ========================================= -->
+
+<div class="form-section">
+
+    <label for="story_prompt">
+        Story Prompt
+    </label>
+
+    <textarea
+        id="story_prompt"
+        name="story_prompt"
+        rows="5"
+        placeholder="Example: A brave fox explores an enchanted forest and discovers a hidden library..."
+        required
+    ></textarea>
+
+</div>
+
+
+<!-- ========================================= -->
+<!-- MAIN OPTIONS -->
+<!-- ========================================= -->
+
+<div class="grid">
+
+
+    <!-- CHARACTER -->
+
+    <div class="form-field">
+
+        <label for="character_name">
+            Main Character Name
+        </label>
+
+        <input
+            id="character_name"
+            name="character_name"
+            placeholder="Lumi"
+            required
+        >
+
+    </div>
+
+
+    <!-- NUMBER OF PANELS -->
+
+    <div class="form-field">
+
+        <label for="panel_count">
+            Number of Panels
+        </label>
+
+        <select
+            id="panel_count"
+            name="panel_count"
+        >
+
+            <option value="3">
+                3 Panels · Short
+            </option>
+
+            <option value="5" selected>
+                5 Panels · Standard
+            </option>
+
+            <option value="7">
+                7 Panels · Detailed
+            </option>
+
+            <option value="9">
+                9 Panels · Extended
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- SETTING -->
+
+    <div class="form-field">
+
+        <label for="setting">
+            Setting
+        </label>
+
+        <select
+            id="setting"
+            name="setting"
+            onchange="toggleCustomField(
+                'setting',
+                'custom-setting'
+            )"
+        >
+
+            <option value="Enchanted forest">
+                Enchanted Forest
+            </option>
+
+            <option value="School">
+                School
+            </option>
+
+            <option value="Space">
+                Space
+            </option>
+
+            <option value="Futuristic city">
+                Futuristic City
+            </option>
+
+            <option value="Village">
+                Village
+            </option>
+
+            <option value="Underwater world">
+                Underwater World
+            </option>
+
+            <option value="Medieval kingdom">
+                Medieval Kingdom
+            </option>
+
+            <option value="Desert">
+                Desert
+            </option>
+
+            <option value="Dinosaur world">
+                Dinosaur World
+            </option>
+
+            <option value="Magical academy">
+                Magical Academy
+            </option>
+
+            <option value="Custom">
+                Custom Setting
+            </option>
+
+        </select>
+
+
+        <div
+            id="custom-setting"
+            class="custom-field hidden"
+        >
+
+            <input
+                type="text"
+                id="setting_custom"
+                placeholder="Enter your own setting"
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- STORY TONE -->
+
+    <div class="form-field">
+
+        <label for="tone">
+            Story Tone
+        </label>
+
+        <select
+            id="tone"
+            name="tone"
+            onchange="toggleCustomField(
+                'tone',
+                'custom-tone'
+            )"
+        >
+
+            <option value="Adventurous">
+                Adventurous
+            </option>
+
+            <option value="Light-hearted">
+                Light-hearted
+            </option>
+
+            <option value="Funny">
+                Funny
+            </option>
+
+            <option value="Mysterious">
+                Mysterious
+            </option>
+
+            <option value="Dramatic">
+                Dramatic
+            </option>
+
+            <option value="Poetic">
+                Poetic
+            </option>
+
+            <option value="Inspirational">
+                Inspirational
+            </option>
+
+            <option value="Peaceful">
+                Peaceful
+            </option>
+
+            <option value="Custom">
+                Custom Tone
+            </option>
+
+        </select>
+
+
+        <div
+            id="custom-tone"
+            class="custom-field hidden"
+        >
+
+            <input
+                type="text"
+                id="tone_custom"
+                placeholder="Example: suspenseful but hopeful"
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- ART STYLE -->
+
+    <div class="form-field">
+
+        <label for="art_style">
+            Art Style
+        </label>
+
+        <select
+            id="art_style"
+            name="art_style"
+            onchange="toggleCustomField(
+                'art_style',
+                'custom-art-style'
+            )"
+        >
+
+            <option value="Comic book">
+                Comic Book
+            </option>
+
+            <option value="Anime">
+                Anime
+            </option>
+
+            <option value="Pixel art">
+                Pixel Art
+            </option>
+
+            <option value="Watercolor illustration">
+                Watercolor Illustration
+            </option>
+
+            <option value="Graphic novel">
+                Graphic Novel
+            </option>
+
+            <option value="Cartoon">
+                Cartoon
+            </option>
+
+            <option value="Fantasy illustration">
+                Fantasy Illustration
+            </option>
+
+            <option value="Children's storybook">
+                Children's Storybook
+            </option>
+
+            <option value="Custom">
+                Custom Art Style
+            </option>
+
+        </select>
+
+
+        <div
+            id="custom-art-style"
+            class="custom-field hidden"
+        >
+
+            <input
+                type="text"
+                id="art_style_custom"
+                placeholder="Example: soft hand-drawn sketch"
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- AUDIENCE -->
+
+    <div class="form-field">
+
+        <label for="audience">
+            Intended Audience
+        </label>
+
+        <select
+            id="audience"
+            name="audience"
+        >
+
+            <option value="Children">
+                Children
+            </option>
+
+            <option value="Young Readers">
+                Young Readers
+            </option>
+
+            <option value="General" selected>
+                General Audience
+            </option>
+
+            <option value="Adults">
+                Adults
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- NARRATION LENGTH -->
+
+    <div class="form-field">
+
+        <label for="narration_length">
+            Narration Length
+        </label>
+
+        <select
+            id="narration_length"
+            name="narration_length"
+        >
+
+            <option value="Short">
+                Short
+            </option>
+
+            <option value="Normal" selected>
+                Normal
+            </option>
+
+            <option value="Detailed">
+                Detailed
+            </option>
+
+        </select>
+
+    </div>
+
+
+</div>
+
+
+<!-- ========================================= -->
+<!-- GENERATE BUTTON -->
+<!-- ========================================= -->
+
+<div class="generate-area">
+
+    <button
+        type="submit"
+        class="primary"
+        id="generate-button"
+    >
+
+        <span id="button-label">
+            Create My Comic
+        </span>
+
+        <span
+            id="spinner"
+            class="spinner hidden"
+        ></span>
+
+    </button>
+
+
+    <p class="generate-description">
+        ✨ Creating your comic may take a few moments.
+        Please wait while we generate your story,
+        panels, and illustrations.
+    </p>
+
+</div>
+
+
+</form>
+
+</section>
+
+
+<!-- ========================================= -->
+<!-- CUSTOM FIELD + FORM SCRIPT -->
+<!-- ========================================= -->
+
+<script>
+
+function toggleCustomField(
+    selectId,
+    customContainerId
+) {
+
+    const select =
+        document.getElementById(selectId);
+
+    const customContainer =
+        document.getElementById(
+            customContainerId
+        );
+
+    if (!select || !customContainer) {
+        return;
+    }
+
+    if (select.value === "Custom") {
+
+        customContainer.classList.remove(
+            "hidden"
+        );
+
+    } else {
+
+        customContainer.classList.add(
+            "hidden"
+        );
+
+    }
+
+}
+
+
+document
+    .getElementById("comic-form")
+    .addEventListener(
+        "submit",
+        function () {
+
+            const setting =
+                document.getElementById(
+                    "setting"
+                );
+
+            const settingCustom =
+                document.getElementById(
+                    "setting_custom"
+                );
+
+            const tone =
+                document.getElementById(
+                    "tone"
+                );
+
+            const toneCustom =
+                document.getElementById(
+                    "tone_custom"
+                );
+
+            const artStyle =
+                document.getElementById(
+                    "art_style"
+                );
+
+            const artStyleCustom =
+                document.getElementById(
+                    "art_style_custom"
+                );
+
+
+            if (
+                setting.value === "Custom"
+                && settingCustom.value.trim()
+            ) {
+
+                setting.value =
+                    settingCustom.value.trim();
+
+            }
+
+
+            if (
+                tone.value === "Custom"
+                && toneCustom.value.trim()
+            ) {
+
+                tone.value =
+                    toneCustom.value.trim();
+
+            }
+
+
+            if (
+                artStyle.value === "Custom"
+                && artStyleCustom.value.trim()
+            ) {
+
+                artStyle.value =
+                    artStyleCustom.value.trim();
+
+            }
+
+
+            const button =
+                document.getElementById(
+                    "generate-button"
+                );
+
+            const label =
+                document.getElementById(
+                    "button-label"
+                );
+
+            const spinner =
+                document.getElementById(
+                    "spinner"
+                );
+
+
+            if (button) {
+
+                button.disabled = true;
+
+            }
+
+
+            if (label) {
+
+                label.textContent =
+                    "Creating Your Comic...";
+
+            }
+
+
+            if (spinner) {
+
+                spinner.classList.remove(
+                    "hidden"
+                );
+
+            }
+
+        }
+    );
+
+</script>
+
+{% endblock %}

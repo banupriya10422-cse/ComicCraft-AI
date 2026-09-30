@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block title %}
+Comic Preview · ComicCraft
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="page-heading">
+
+<p class="eyebrow">
+YOUR GENERATED COMIC
+</p>
+
+
+<h1>
+{{ comic.request.character_name }}'s Adventure
+</h1>
+
+
+<p>
+{{ comic.request.story_prompt }}
+</p>
+
+</section>
+
+
+
+<div class="actions">
+
+<a
+    class="primary button-link"
+    href="/download/{{ comic.comic_id }}"
+>
+Download Your Comic as PDF
+</a>
+
+
+<a
+    class="secondary button-link"
+    href="/export-success/{{ comic.comic_id }}"
+>
+Export Page
+</a>
+
+
+<a
+    class="secondary button-link"
+    href="/"
+>
+Create Another
+</a>
+
+</div>
+
+
+
+<section class="comic-list">
+
+
+{% for panel in comic.panels %}
+
+
+<article class="comic-panel">
+
+
+<div class="panel-number">
+
+PANEL {{ panel.panel_number }}
+
+</div>
+
+
+<h2>
+{{ panel.title }}
+</h2>
+
+
+<img
+    src="{{ panel.image_path }}"
+    alt="Comic illustration for panel {{ panel.panel_number }}"
+    loading="lazy"
+>
+
+
+
+<p class="scene">
+
+<em>
+{{ panel.scene_description }}
+</em>
+
+</p>
+
+
+
+{% if panel.caption %}
+
+<div class="caption">
+
+<strong>
+Caption:
+</strong>
+
+{{ panel.caption }}
+
+</div>
+
+{% endif %}
+
+
+
+<div class="narration">
+
+<strong>
+Narration
+</strong>
+
+<p>
+{{ panel.narration }}
+</p>
+
+</div>
+
+
+
+{% if panel.dialogue %}
+
+<div class="dialogue">
+
+<strong>
+Dialogue
+</strong>
+
+
+{% for line in panel.dialogue %}
+
+<p>
+“{{ line }}”
+</p>
+
+{% endfor %}
+
+</div>
+
+{% endif %}
+
+
+
+<details>
+
+<summary>
+View image prompt
+</summary>
+
+<p>
+{{ panel.image_prompt }}
+</p>
+
+</details>
+
+
+</article>
+
+
+{% endfor %}
+
+
+</section>
+
+{% endblock %}
